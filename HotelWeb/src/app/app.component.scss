@@ -1,0 +1,53 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  nz-layout {
+    height: 100vh;
+    display: flex; // Usar flexbox
+  flex-direction: column; // Itens em coluna
+  justify-content: center;
+  
+    nz-sider {
+      height: 100%; 
+      background-color: #001529;
+    }
+  
+    nz-content {
+      padding: 24px;
+    }
+  
+    nz-footer {
+      text-align: center;
+    }
+  }
+  
+  ul[nz-menu] {
+    margin-top: 40px;
+    color: rgba(255, 255, 255, 0.383);
+    list-style: none;
+    padding-left: 20px;
+    cursor: pointer;
+  
+    li[nz-menu-item] {
+      color: rgba(255, 255, 255, 0.383);
+      margin-bottom: 20px;
+      display: flex; 
+      align-items: center;
+  
+      span[nz-icon] {
+        margin-right: 8px;
+        color: rgba(255, 255, 255, 0.383);
+      }
+  
+      &:hover {
+        color: white; 
+  
+        span[nz-icon] {
+          color: white;
+        }
+      }
+    }
+  }
+  

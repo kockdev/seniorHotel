@@ -1,0 +1,62 @@
+<div class="container">
+    <button nz-button nzType="primary" (click)="openModal()">Criar Reserva</button>
+  
+    <nz-table [nzData]="reservas" nzBordered>
+      <thead>
+        <tr>
+          <th>Hóspede ID</th>
+          <th>Data Reserva Inicio</th>
+          <th>Data Reserva Fim</th>
+          <th>Data Ckeckin</th>
+          <th>Data Ckeckout</th>
+          <th>Carro</th>
+          <th>Check-in</th>
+          <th>Check-out</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reserva of reservas">
+          <td>{{ reserva.hospedeId }}</td>
+          <td>{{ reserva.dtReservaInicio }}</td>
+          <td>{{ reserva.dtReservaFim }}</td>
+          <td>{{ reserva.dataCheckin }}</td>
+          <td>{{ reserva.dataCheckout}}</td>
+          <td>{{ reserva.carro ? 'Sim' : 'Não' }}</td>
+          <td>
+            <button nz-button nzType="default" (click)="checkinReserva(reserva.id!)" 
+                    [disabled]="reserva.dataCheckin">Check-in</button>
+          </td>
+          <td>
+            <button nz-button nzType="default" (click)="checkoutReserva(reserva.id!)" 
+                    [disabled]="!reserva.dataCheckin || reserva.dataCheckout">Check-out</button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  
+    <!-- Modal para criação de reservas -->
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Criar Reserva" (nzOnCancel)="closeModal()" (nzOnOk)="submitForm()">
+        <form *nzModalContent [formGroup]="reservaForm" (ngSubmit)="submitForm()">
+          <div>
+            <label for="hospedeId">Hóspede</label>
+            <nz-select id="hospedeId" formControlName="hospedeId" nzPlaceHolder="Selecione um hóspede">
+              <nz-option *ngFor="let hospede of hospedes" [nzValue]="hospede.id" [nzLabel]="hospede.nome"></nz-option>
+            </nz-select>
+          </div>
+          <div>
+            <label for="dtReservaInicio">Data de Início</label>
+            <input id="dtReservaInicio" nz-input formControlName="dtReservaInicio" type="date" />
+          </div>
+          <div>
+            <label for="dtReservaFim">Data de Fim</label>
+            <input id="dtReservaFim" nz-input formControlName="dtReservaFim" type="date" />
+          </div>
+          <div>
+            <label for="carro">Usará carro?</label>
+            <input id="carro" type="checkbox" formControlName="carro" />
+          </div>
+        </form>
+      </nz-modal>
+      
+  </div>
+  

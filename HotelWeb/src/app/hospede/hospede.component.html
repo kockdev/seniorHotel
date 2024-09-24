@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="search-container">
+        <nz-input-group [nzSuffix]="suffixTemplate">
+          <input nz-input placeholder="Buscar hóspede" [(ngModel)]="searchTerm" (ngModelChange)="onSearch()" />
+        </nz-input-group>
+        <ng-template #suffixTemplate>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+    
+        <nz-select [(ngModel)]="searchFilter" (ngModelChange)="onSearch()">
+          <nz-option nzValue="nome" nzLabel="Nome"></nz-option>
+          <nz-option nzValue="documento" nzLabel="Documento"></nz-option>
+          <nz-option nzValue="telefone" nzLabel="Telefone"></nz-option>
+          <nz-option nzValue="no-hotel" nzLabel="No Hotel"></nz-option>
+          <nz-option nzValue="sem-checkin" nzLabel="Sem Check-In"></nz-option>
+        </nz-select>
+      </div>
+      <br>
+    <button nz-button nzType="primary" (click)="openModal()">Criar Hóspede</button>
+  
+    <nz-table [nzData]="hospedes" nzBordered>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Documento</th>
+          <th>Telefone</th>
+          <th>No Hotel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hospede of hospedes">
+          <td>{{ hospede.nome }}</td>
+          <td>{{ hospede.documento }}</td>
+          <td>{{ hospede.telefone }}</td>
+          <td>{{ hospede.noHotel }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Criar Hóspede" 
+            (nzOnCancel)="closeModal()" 
+            [nzOkDisabled]="!hospedeForm.valid" 
+            (nzOnOk)="submitForm()">
+    <form *nzModalContent [formGroup]="hospedeForm">
+      <div>
+        <label for="nome">Nome</label>
+        <input id="nome" nz-input formControlName="nome" placeholder="Insira o nome" />
+      </div>
+      <div>
+        <label for="documento">Documento</label>
+        <input id="documento" nz-input formControlName="documento" placeholder="Insira o documento" />
+      </div>
+      <div>
+        <label for="telefone">Telefone</label>
+        <input id="telefone" nz-input formControlName="telefone" placeholder="Insira o telefone" />
+      </div>
+    </form>
+  </nz-modal>
+  </div>
+  

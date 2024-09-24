@@ -1,0 +1,21 @@
+<nz-layout>
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/hospede">
+        <span nz-icon nzType="user"></span>
+        <span ><strong> Hospedes</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/reserva">
+        <span nz-icon nzType="pull-request"></span>
+        <span><strong> Reservas</strong></span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+    <nz-footer></nz-footer>
+  </nz-layout>
+</nz-layout>
